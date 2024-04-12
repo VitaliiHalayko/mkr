@@ -1,4 +1,3 @@
-Product name: Товар1
+Product name: Product1
 2024-03-15: price: 100.0
-2024-03-25: price: 95.0 | Price decreased by 5.0
-2024-04-05: price: 105.0 | Price increased by 10.0
+2024-03-20: price: 150.0 | Price increased by 50.0
