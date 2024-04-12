@@ -13,6 +13,25 @@ def read_file(file_path: str) -> list:
     return data_from_file
 
 
+def save_to_file(product_data: dict, product_name: str, file_path: str) -> None:
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(f"Product name: {product_name}\n")
+
+        prev_price = None
+        for date, price in product_data.items():
+            if prev_price is not None:
+                price_change = float(price) - float(prev_price)
+                if price_change > 0:
+                    file.write(f"{date}: Price increased by {price_change}\n")
+                elif price_change < 0:
+                    file.write(f"{date}: Price decreased by {abs(price_change)}\n")
+                else:
+                    file.write(f"{date}: Price remained unchanged\n")
+            else:
+                file.write(f"{date}: {price}\n")
+            prev_price = price
+
+
 def analyze_data(data_from_file: list, product_name: str) -> (dict, str):
     product_data = {}
     for record in data_from_file:
@@ -25,7 +44,7 @@ def analyze_data(data_from_file: list, product_name: str) -> (dict, str):
     return product_data, "Product was found"
 
 
-def show_data(product_data: dict, product_name: str):
+def show_data(product_data: dict, product_name: str) -> None:
     dates = [datetime.strptime(date, "%Y-%m-%d") for date in product_data.keys()]
     prices = [float(price) for price in product_data.values()]
 
@@ -47,6 +66,8 @@ def main(input_file, output_file):
     product_data, response = analyze_data(data_from_file, product_name)
 
     show_data(product_data, product_name)
+
+    save_to_file(product_data, product_name, output_file)
 
 
 
