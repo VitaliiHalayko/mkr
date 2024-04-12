@@ -65,10 +65,12 @@ def main(input_file, output_file):
 
     product_data, response = analyze_data(data_from_file, product_name)
 
-    show_data(product_data, product_name)
-
-    save_to_file(product_data, product_name, output_file)
-
+    if response == "Product was found":
+        show_data(product_data, product_name)
+        save_to_file(product_data, product_name, output_file)
+    else:
+        print("Invalid product name. Please input a valid product name")
+        main(input_file, output_file)
 
 
 if __name__ == '__main__':
