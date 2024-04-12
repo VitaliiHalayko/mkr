@@ -22,13 +22,13 @@ def save_to_file(product_data: dict, product_name: str, file_path: str) -> None:
             if prev_price is not None:
                 price_change = float(price) - float(prev_price)
                 if price_change > 0:
-                    file.write(f"{date}: Price increased by {price_change}\n")
+                    file.write(f"{date}: price: {price} | Price increased by {price_change}\n")
                 elif price_change < 0:
-                    file.write(f"{date}: Price decreased by {abs(price_change)}\n")
+                    file.write(f"{date}: price: {price} | Price decreased by {abs(price_change)}\n")
                 else:
-                    file.write(f"{date}: Price remained unchanged\n")
+                    file.write(f"{date}: price: {price} | Price remained unchanged\n")
             else:
-                file.write(f"{date}: {price}\n")
+                file.write(f"{date}: price: {price}\n")
             prev_price = price
 
 
