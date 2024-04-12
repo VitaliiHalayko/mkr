@@ -65,6 +65,8 @@ def main(input_file, output_file):
 
     product_data, response = analyze_data(data_from_file, product_name)
 
+    print(product_data)
+
     if response == "Product was found":
         show_data(product_data, product_name)
         save_to_file(product_data, product_name, output_file)
