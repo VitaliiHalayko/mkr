@@ -1,6 +1,6 @@
 import os
 import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # read file function
 def read_file(file_path: str) -> list:
@@ -8,13 +8,17 @@ def read_file(file_path: str) -> list:
     :param file_path: path of the file
     :return: list of dictionaries about the products in file
     """
+    current_date = datetime.now()
     data_from_file = []
     with open(file_path, "r", encoding="utf-8") as file:
         for line in file:
             data = line.strip().split(', ')
             if len(data) == 3:
-                record = {"name": data[0], "date": data[1], "price": data[2]}
-                data_from_file.append(record)
+                name, date_str, price = data
+                date = datetime.strptime(date_str, "%Y-%m-%d")
+                if current_date - date <= timedelta(days=30):
+                    record = {"name": name, "date": date_str, "price": price}
+                    data_from_file.append(record)
     return data_from_file
 
 # save to file function
