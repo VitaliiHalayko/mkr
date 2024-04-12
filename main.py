@@ -17,6 +17,9 @@ def analyze_data(data_from_file: list, product_name: str):
         if record["name"] == product_name:
             product_data.update({record["date"]: record["price"]})
 
+    if product_data == {}:
+        return "Product not found"
+
     return product_data
 
 
